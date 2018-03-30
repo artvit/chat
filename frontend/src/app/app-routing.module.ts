@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from "./auth/auth.guard";
+import { ChatComponent } from "./chat/chat.component";
 
-const routes: Routes = [];
+const routes: Routes = [{
+  path: 'chat',
+  component: ChatComponent,
+  canActivate: [
+    AuthGuard
+  ]
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
