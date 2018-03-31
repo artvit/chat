@@ -14,6 +14,7 @@ import { UserComponent } from './chat/user-list/user/user.component';
 import { MessageInputComponent } from './chat/message-input/message-input.component';
 import { MessageListComponent } from './chat/message-list/message-list.component';
 import { MessageComponent } from './chat/message-list/message/message.component';
+import { ScrollTopDirective } from './chat/message-list/scroll-top.directive';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MessageComponent } from './chat/message-list/message/message.component'
     UserComponent,
     MessageInputComponent,
     MessageListComponent,
-    MessageComponent
+    MessageComponent,
+    ScrollTopDirective
   ],
   imports: [
     BrowserModule,

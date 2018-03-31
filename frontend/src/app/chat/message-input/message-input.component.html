@@ -1,12 +1,14 @@
 <div class="input-container">
   <textarea
+    #textarea
     title="Message"
     [(ngModel)]="text"
-    (keyup.enter)="sendText()"
+    (keydown.enter)="sendText($event)"
     [maxlength]="2048"
     autofocus>
   </textarea>
-  <button (click)="sendText()" >
+  <button
+    (click)="sendText($event)">
     Send <i class="fa fa-comment"></i>
   </button>
 </div>

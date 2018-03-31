@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'chat-message-input',
@@ -11,16 +11,24 @@ export class MessageInputComponent implements OnInit {
 
   @Output() textSent: EventEmitter<string> = new EventEmitter<string>();
 
+  @ViewChild('textarea') textArea: ElementRef;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  sendText() {
+  sendText(event: Event) {
+    event.preventDefault();
     if (this.text) {
       this.textSent.emit(this.text);
       this.text = '';
     }
+    this.focusInput();
+  }
+
+  focusInput() {
+    this.textArea.nativeElement.focus();
   }
 
 }

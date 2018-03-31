@@ -31,10 +31,17 @@ export class ChatComponent implements OnInit {
     message2.text = `22222222222222222222222222222222222222222222`;
 
     this.messages = [message, message2];
+    this.messages = this.messages.concat(this.messages);
+    this.messages = this.messages.concat(this.messages);
+    this.messages = this.messages.concat(this.messages);
   }
 
   sendMessage(text: string) {
     console.log(text)
+  }
+
+  onScrolledToTop(oldestMessage: Message) {
+    console.log(oldestMessage);
   }
 
 }
