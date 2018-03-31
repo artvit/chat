@@ -1,17 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'chat-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
-
+export class UserListComponent {
   @Input() users = [];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

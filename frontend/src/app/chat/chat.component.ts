@@ -18,8 +18,12 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authService.userProfile;
     this.activeUsers = [this.currentUser, this.currentUser, this.currentUser];
-    this.activeUsers = this.activeUsers.concat(this.activeUsers)
-    this.activeUsers = this.activeUsers.concat(this.activeUsers)
+    this.activeUsers = this.activeUsers.concat(this.activeUsers);
+    this.activeUsers = this.activeUsers.concat(this.activeUsers);
+  }
+
+  sendMessage(text: string) {
+    console.log(text)
   }
 
 }

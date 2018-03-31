@@ -7,5 +7,10 @@
   </div>
 </div>
 <div class="column-right">
-  chat
+  <div class="messages">
+    messages
+  </div>
+  <div class="message-input">
+    <chat-message-input (textSent)="sendMessage($event)"></chat-message-input>
+  </div>
 </div>

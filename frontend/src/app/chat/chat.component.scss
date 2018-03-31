@@ -1,7 +1,7 @@
 $profileHeight: 180px;
 $leftColumnWidth: 300px;
 $baseMargin: 10px;
-
+$messageInputHeight: 50px;
 
 :host {
   position: absolute;
@@ -31,5 +31,16 @@ $baseMargin: 10px;
 .column-right {
   margin: $baseMargin 0 $baseMargin $baseMargin;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .messages {
+    flex-grow: 1;
+    margin-bottom: $baseMargin;
+  }
+
+  .message-input {
+    flex-basis: $messageInputHeight;
+  }
 }
 
