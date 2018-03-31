@@ -7,13 +7,15 @@ import { ChatComponent } from './chat/chat.component';
 import { OAuthModule } from "angular-oauth2-oidc";
 import { HttpClientModule } from "@angular/common/http";
 import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
+import { ProfileComponent } from './chat/profile/profile.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
-    NotLoggedInComponent
+    NotLoggedInComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
