@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService } from "angular-oauth2-oidc";
 import { authConfig } from "./auth-config";
+import { User } from "../chat/model/user.model";
 
 @Injectable()
 export class AuthService {
@@ -20,8 +21,9 @@ export class AuthService {
     this.oAuthService.logOut();
   }
 
-  get userProfile(): any {
-    return this.oAuthService.getIdentityClaims();
+  get userProfile(): User {
+    const userFromGoogle: any = this.oAuthService.getIdentityClaims();
+    return { name: userFromGoogle.name, imageUrl: userFromGoogle.picture };
   }
 
   get isLoggedIn(): boolean {
