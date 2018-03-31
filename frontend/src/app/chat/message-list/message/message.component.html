@@ -1,0 +1,16 @@
+<div class="message-container">
+  <div class="author-image">
+    <img [src]="message.author.imageUrl">
+  </div>
+  <div class="middle-part">
+    <div class="author-name">
+      {{ message.author.name }}
+    </div>
+    <div class="text">
+      {{ message.text }}
+    </div>
+  </div>
+  <div class="date">
+    {{ formatDate(message.dateTime) }}
+  </div>
+</div>

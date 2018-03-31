@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.message-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  > * {
+    margin: 10px;
+  }
+
+  .author-image {
+    img {
+      border-radius: 50%;
+      border: white 2px solid;
+      height: 48px;
+      width: 48px;
+    }
+  }
+
+  .middle-part {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+
+    .author-name {
+      font-weight: bold;
+    }
+
+    .text {
+
+    }
+  }
+
+  .date {
+    font-size: smaller;
+    white-space: nowrap;
+  }
+}

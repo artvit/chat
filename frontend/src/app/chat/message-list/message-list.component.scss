@@ -1,0 +1,10 @@
+:host {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #4D5C6D;
+  overflow-y: auto;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}

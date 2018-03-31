@@ -37,6 +37,7 @@ $messageInputHeight: 50px;
   .messages {
     flex-grow: 1;
     margin-bottom: $baseMargin;
+    position: relative;
   }
 
   .message-input {

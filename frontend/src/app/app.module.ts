@@ -12,6 +12,8 @@ import { ProfileComponent } from './chat/profile/profile.component';
 import { UserListComponent } from './chat/user-list/user-list.component';
 import { UserComponent } from './chat/user-list/user/user.component';
 import { MessageInputComponent } from './chat/message-input/message-input.component';
+import { MessageListComponent } from './chat/message-list/message-list.component';
+import { MessageComponent } from './chat/message-list/message/message.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { MessageInputComponent } from './chat/message-input/message-input.compon
     ProfileComponent,
     UserListComponent,
     UserComponent,
-    MessageInputComponent
+    MessageInputComponent,
+    MessageListComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
