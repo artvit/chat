@@ -1,0 +1,15 @@
+.user-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  img {
+    height: 50px;
+    border-radius: 50%;
+    border: white 2px solid;
+  }
+
+  .name-container {
+    margin-left: 20px;
+  }
+}

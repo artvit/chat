@@ -11,10 +11,15 @@ export class ChatComponent implements OnInit {
 
   currentUser: User;
 
+  activeUsers: User[];
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.currentUser = this.authService.userProfile;
+    this.activeUsers = [this.currentUser, this.currentUser, this.currentUser];
+    this.activeUsers = this.activeUsers.concat(this.activeUsers)
+    this.activeUsers = this.activeUsers.concat(this.activeUsers)
   }
 
 }
