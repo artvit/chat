@@ -1,0 +1,19 @@
+.nav-bg {
+  background-color: #4D5C6D;
+
+  .navbar {
+    padding-left: 0;
+    padding-right: 0;
+
+    .navbar-brand {
+      font-size: 30px;
+      color: white;
+    }
+
+    .nav-link {
+      cursor: pointer;
+      font-size: 20px;
+      color: white;
+    }
+  }
+}

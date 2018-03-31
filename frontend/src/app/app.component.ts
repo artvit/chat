@@ -8,14 +8,13 @@ import { TestService } from "./test.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public authService: AuthService, private testService: TestService) { }
 
-  title = 'chat';
-
-  user: any;
-
-  getMe() {
-    this.testService.getMe().subscribe(data => this.user = data);
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
   }
+
+  constructor(
+    public authService: AuthService
+  ) { }
 
 }

@@ -6,9 +6,10 @@ import { authConfig } from "./auth-config";
 @Injectable()
 export class AuthService {
 
-  constructor(private router: Router, private oAuthService: OAuthService) {
+  constructor(private oAuthService: OAuthService) {
     this.oAuthService.configure(authConfig);
     this.oAuthService.loadDiscoveryDocumentAndTryLogin();
+    this.oAuthService.setupAutomaticSilentRefresh();
   }
 
   login() {
