@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../auth/auth.service";
+import { Component, Input } from '@angular/core';
 import { User } from "../model/user.model";
 
 @Component({
@@ -7,14 +6,6 @@ import { User } from "../model/user.model";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
-
-  user: User;
-
-  constructor(private authService: AuthService) { }
-
-  ngOnInit() {
-    this.user = this.authService.userProfile;
-  }
-
+export class ProfileComponent{
+  @Input() user: User;
 }

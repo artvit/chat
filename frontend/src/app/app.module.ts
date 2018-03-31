@@ -8,6 +8,8 @@ import { OAuthModule } from "angular-oauth2-oidc";
 import { HttpClientModule } from "@angular/common/http";
 import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
 import { ProfileComponent } from './chat/profile/profile.component';
+import { UserListComponent } from './chat/user-list/user-list.component';
+import { UserComponent } from './chat/user-list/user/user.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { ProfileComponent } from './chat/profile/profile.component';
     AppComponent,
     ChatComponent,
     NotLoggedInComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserListComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
