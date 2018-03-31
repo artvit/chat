@@ -8,17 +8,12 @@ export class AuthService {
 
   constructor(private router: Router, private oAuthService: OAuthService) {
     this.oAuthService.configure(authConfig);
-    // this.oAuthService.tokenValidationHandler = new JwksValidationHandler();
     this.oAuthService.loadDiscoveryDocumentAndTryLogin();
   }
 
   login() {
     this.oAuthService.initImplicitFlow();
   }
-
-  handleLoginCallback() {
-  }
-
 
   logout() {
     this.oAuthService.logOut();
@@ -29,7 +24,10 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    return !!this.oAuthService.getIdentityClaims();
+    return !!this.userProfile;
   }
 
+  get authToken(): string {
+    return this.oAuthService.getAccessToken()
+  }
 }

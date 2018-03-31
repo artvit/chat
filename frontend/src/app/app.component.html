@@ -15,8 +15,10 @@
   </li>
 </ul>
 
-{{ authService.accessToken | json }}
-
 {{ authService.userProfile | json }}
+
+{{ user | json }}
+
+<button (click)="getMe()">Get Me</button>
 
 <router-outlet></router-outlet>

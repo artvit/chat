@@ -8,6 +8,7 @@ import { AuthService } from "./auth/auth.service";
 import { ChatComponent } from './chat/chat.component';
 import { OAuthModule } from "angular-oauth2-oidc";
 import { HttpClientModule } from "@angular/common/http";
+import { TestService } from "./test.service";
 
 
 @NgModule({
@@ -21,12 +22,12 @@ import { HttpClientModule } from "@angular/common/http";
     AppRoutingModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: ['http://localhost:8080'],
+        allowedUrls: [''],
         sendAccessToken: true
       }
     })
   ],
-  providers: [AuthService],
+  providers: [AuthService, TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
