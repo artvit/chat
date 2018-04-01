@@ -40,7 +40,6 @@ export class MessageListComponent implements OnChanges, AfterViewInit {
   }
 
   onScrollUp(): void {
-    console.log('hello');
     this.scrolledToTop.emit(this.messages[0]);
   }
 

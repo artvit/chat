@@ -10,7 +10,7 @@ export class TestService {
   public getMe() {
     return this.http.get<any>("http://localhost:8080/user/me", {
       headers: {
-        "Authorization": 'Bearer ' + this.authService.authToken
+        'Authorization': 'Bearer ' + this.authService.authToken
       }
     });
   }

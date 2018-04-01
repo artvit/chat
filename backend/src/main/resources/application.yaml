@@ -6,3 +6,6 @@ security:
         resource:
             userInfoUri: https://www.googleapis.com/userinfo/v2/me
             preferTokenInfo: false
+spring:
+    jackson:
+        date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat

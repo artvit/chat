@@ -15,6 +15,8 @@ import { MessageInputComponent } from './chat/message-input/message-input.compon
 import { MessageListComponent } from './chat/message-list/message-list.component';
 import { MessageComponent } from './chat/message-list/message/message.component';
 import { ScrollTopDirective } from './chat/message-list/scroll-top.directive';
+import { MessageService } from "./chat/message.service";
+import { TestService } from "./test.service";
 
 
 @NgModule({
@@ -36,7 +38,7 @@ import { ScrollTopDirective } from './chat/message-list/scroll-top.directive';
     HttpClientModule,
     OAuthModule.forRoot()
   ],
-  providers: [AuthService],
+  providers: [AuthService, MessageService, TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
