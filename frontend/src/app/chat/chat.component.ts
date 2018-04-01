@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from "../auth/auth.service";
 import { User } from "./model/user.model";
 import { Message } from "./model/message.model";
@@ -10,14 +10,13 @@ import { TestService } from "../test.service";
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
-
+export class ChatComponent implements OnInit, OnDestroy {
   currentUser: User;
-  activeUsers: User[];
 
+  activeUsers: User[];
   messages: Message[];
 
-  constructor(private authService: AuthService, private messageService: MessageService, private test: TestService) { }
+  constructor(private authService: AuthService, private messageService: MessageService) { }
 
   ngOnInit() {
     this.currentUser = this.authService.userProfile;
@@ -25,6 +24,10 @@ export class ChatComponent implements OnInit {
     this.activeUsers = this.activeUsers.concat(this.activeUsers);
     this.activeUsers = this.activeUsers.concat(this.activeUsers);
 
+  }
+
+  ngOnDestroy(): void {
+    this.messageService.shutDown();
   }
 
   sendMessage(text: string) {

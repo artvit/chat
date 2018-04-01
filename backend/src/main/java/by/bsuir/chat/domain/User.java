@@ -1,26 +1,15 @@
 package by.bsuir.chat.domain;
 
 public class User {
-    private String email;
     private String name;
     private String photoUrl;
 
     public User() {
-
     }
 
-    public User(String email, String name, String photoUrl) {
-        this.email = email;
+    public User(String name, String photoUrl) {
         this.name = name;
         this.photoUrl = photoUrl;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getName() {

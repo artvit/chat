@@ -14,17 +14,24 @@ export class MessageService {
   private static ServerUrl = 'http://localhost:8080/socket';
   private stompClient: Client;
 
-  private newMessages$: Subject<Message> = new Subject<Message>();
+  readonly messages: Observable<Message>;
+
+  private readonly newMessages$: Subject<Message> = new Subject<Message>();
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.initializeWebSocketConnection();
+    this.messages = this.initMessagesObservable();
   }
 
   private initializeWebSocketConnection() {
     let ws = new SockJS(MessageService.ServerUrl + '?access_token=' + this.authService.authToken);
     this.stompClient = StompJS.over(ws);
     this.stompClient.connect(this.headers, () => this.onConnect());
-    this.newMessages$.subscribe(console.log);
+    this.stompClient.debug = null
+  }
+
+  private initMessagesObservable(): Observable<Message> {
+    return this.newMessages$.asObservable();
   }
 
   private onConnect() {

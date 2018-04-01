@@ -8,7 +8,7 @@ import { Subscription } from "rxjs/Subscription";
   selector: '[chatScrollTop]'
 })
 export class ScrollTopDirective implements AfterViewInit, OnDestroy {
-  @Input() scrollPercent: number = 80;
+  @Input() scrollPercent: number = 90;
 
   @Output() scrolledUp: EventEmitter<void> = new EventEmitter<void>();
   private scrolledUpEvents: Observable<any>;
