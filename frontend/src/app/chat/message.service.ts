@@ -64,7 +64,9 @@ export class MessageService {
         date: typeof date === 'string' ? date : date.toISOString()
       }})
       .subscribe(oldMessages => {
-        this.messages$.next(oldMessages.concat(this.messages$.getValue()));
+        const alreadyLoaded = this.messages$.getValue();
+        const filteredLoaded = oldMessages.filter(message => !alreadyLoaded.some(loadedMessage => loadedMessage.id === message.id));
+        this.messages$.next(filteredLoaded.concat(alreadyLoaded));
       });
   }
 

@@ -26,6 +26,6 @@ public class MessageController {
     public List<Message> historyMessages(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date,
             @RequestParam int size) {
-        return this.messageRepository.findByDateTimeBefore(date, PageRequest.of(0, size));
+        return this.messageRepository.findByDateTimeBefore(date.plusHours(3), PageRequest.of(0, size));
     }
 }
