@@ -1,6 +1,10 @@
-logging:
-    level:
-        org.springframework.security: DEBUG
+#logging:
+#    level:
+#        org.springframework.data.document.mongodb: DEBUG
+#        org.springframework.security: DEBUG
+log4j:
+    category:
+        org.springframework.data.document.mongodb: DEBUG
 security:
     oauth2:
         resource:

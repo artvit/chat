@@ -1,4 +1,4 @@
 export class User {
-  imageUrl: string;
+  photoUrl: string;
   name: string;
 }

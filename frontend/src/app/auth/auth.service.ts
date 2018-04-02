@@ -22,7 +22,7 @@ export class AuthService {
 
   get userProfile(): User {
     const userFromGoogle: any = this.oAuthService.getIdentityClaims();
-    return userFromGoogle ? { name: userFromGoogle.name, imageUrl: userFromGoogle.picture } : null;
+    return userFromGoogle ? { name: userFromGoogle.name, photoUrl: userFromGoogle.picture } : null;
   }
 
   get isLoggedIn(): boolean {

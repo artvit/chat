@@ -8,7 +8,7 @@
 </div>
 <div class="column-right">
   <div class="messages">
-    <chat-message-list [messages]="messages" (scrolledToTop)="onScrolledToTop($event)"></chat-message-list>
+    <chat-message-list [messages]="messages | async" (scrolledToTop)="onScrolledToTop($event)"></chat-message-list>
   </div>
   <div class="message-input">
     <chat-message-input (textSent)="sendMessage($event)"></chat-message-input>

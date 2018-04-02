@@ -38,7 +38,11 @@ import { TestService } from "./test.service";
     HttpClientModule,
     OAuthModule.forRoot()
   ],
-  providers: [AuthService, MessageService, TestService],
+  providers: [
+    AuthService,
+    MessageService,
+    TestService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/observable/fromEvent';
 import { debounceTime, filter, map, pairwise } from "rxjs/operators";
 import { Subscription } from "rxjs/Subscription";
+import { fromEvent } from "rxjs/observable/fromEvent";
 
 @Directive({
   selector: '[chatScrollTop]'
@@ -17,7 +17,7 @@ export class ScrollTopDirective implements AfterViewInit, OnDestroy {
   constructor(private elementRef: ElementRef) { }
 
   ngAfterViewInit(): void {
-    this.scrolledUpEvents = Observable.fromEvent(this.elementRef.nativeElement, 'scroll')
+    this.scrolledUpEvents = fromEvent(this.elementRef.nativeElement, 'scroll')
       .pipe(
         map((e: any) => ({
           scrollHeight: e.target.scrollHeight,

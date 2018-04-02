@@ -3,7 +3,7 @@ import { AuthService } from "../auth/auth.service";
 import { User } from "./model/user.model";
 import { Message } from "./model/message.model";
 import { MessageService } from "./message.service";
-import { TestService } from "../test.service";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'chat-chat',
@@ -14,20 +14,22 @@ export class ChatComponent implements OnInit, OnDestroy {
   currentUser: User;
 
   activeUsers: User[];
-  messages: Message[];
 
-  constructor(private authService: AuthService, private messageService: MessageService) { }
+  messages: Observable<Message[]>;
+
+  constructor(private authService: AuthService, private messageService: MessageService) {
+    this.messages = messageService.messages;
+  }
 
   ngOnInit() {
     this.currentUser = this.authService.userProfile;
     this.activeUsers = [this.currentUser, this.currentUser, this.currentUser];
-    this.activeUsers = this.activeUsers.concat(this.activeUsers);
-    this.activeUsers = this.activeUsers.concat(this.activeUsers);
 
+    this.messageService.getOldMessages(50, new Date());
   }
 
   ngOnDestroy(): void {
-    this.messageService.shutDown();
+    this.messageService.shutDown()
   }
 
   sendMessage(text: string) {
@@ -35,7 +37,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   onScrolledToTop(oldestMessage: Message) {
-    console.log(oldestMessage);
+    this.messageService.getOldMessages(50, oldestMessage.dateTime);
   }
 
 }

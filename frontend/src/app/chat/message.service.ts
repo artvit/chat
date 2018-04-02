@@ -4,9 +4,11 @@ import * as SockJS from 'sockjs-client';
 import * as StompJS from 'stompjs';
 import { Client } from "stompjs";
 import { AuthService } from "../auth/auth.service";
-import { Subject } from "rxjs/Subject";
 import { Message } from "./model/message.model";
 import { Observable } from "rxjs/Observable";
+import { Subject } from "rxjs/Subject";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { combineLatest } from "rxjs/observable/combineLatest";
 
 
 @Injectable()
@@ -14,13 +16,13 @@ export class MessageService {
   private static ServerUrl = 'http://localhost:8080/socket';
   private stompClient: Client;
 
-  readonly messages: Observable<Message>;
+  readonly messages: Observable<Message[]>;
 
-  private readonly newMessages$: Subject<Message> = new Subject<Message>();
+  private messages$: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.initializeWebSocketConnection();
-    this.messages = this.initMessagesObservable();
+    this.messages = this.initializeMessagesObservable();
   }
 
   private initializeWebSocketConnection() {
@@ -30,15 +32,15 @@ export class MessageService {
     this.stompClient.debug = null
   }
 
-  private initMessagesObservable(): Observable<Message> {
-    return this.newMessages$.asObservable();
+  private initializeMessagesObservable(): Observable<Message[]>{
+    return this.messages$.asObservable();
   }
 
   private onConnect() {
     this.stompClient.subscribe("/chat", (message) => {
       if(message.body) {
         const messageObject: Message = JSON.parse(message.body);
-        this.newMessages$.next(messageObject);
+        this.messages$.next(this.messages$.getValue().concat(messageObject));
       }
     }, this.headers);
   }
@@ -51,18 +53,24 @@ export class MessageService {
     this.stompClient.disconnect(() => {});
   }
 
+  getOldMessages(size: number, date: Date | string): void {
+    if (!date || !size) {
+      return;
+    }
+    this.http.get<Message[]>('http://localhost:8080/message/history', {
+      headers: this.headers,
+      params: {
+        size: size.toString(),
+        date: typeof date === 'string' ? date : date.toISOString()
+      }})
+      .subscribe(oldMessages => {
+        this.messages$.next(oldMessages.concat(this.messages$.getValue()));
+      });
+  }
+
   private get headers(): {[header: string]: string} {
     return {
       'Authorization': 'Bearer ' + this.authService.authToken
     }
-  }
-
-  getOldMessages(size: number, date: Date): Observable<Message[]> {
-    return this.http.get<Message[]>('http://localhost:8080/history', {
-      headers: this.headers,
-      params: {
-        size: size.toString(),
-        date: date.toISOString()
-      }});
   }
 }
