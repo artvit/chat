@@ -16,7 +16,7 @@ import { MessageListComponent } from './chat/message-list/message-list.component
 import { MessageComponent } from './chat/message-list/message/message.component';
 import { ScrollTopDirective } from './chat/message-list/scroll-top.directive';
 import { MessageService } from "./chat/message.service";
-import { TestService } from "./test.service";
+import { UserService } from "./chat/user.service";
 
 
 @NgModule({
@@ -41,7 +41,7 @@ import { TestService } from "./test.service";
   providers: [
     AuthService,
     MessageService,
-    TestService
+    UserService
   ],
   bootstrap: [AppComponent]
 })

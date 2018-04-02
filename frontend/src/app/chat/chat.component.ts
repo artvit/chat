@@ -4,6 +4,8 @@ import { User } from "./model/user.model";
 import { Message } from "./model/message.model";
 import { MessageService } from "./message.service";
 import { Observable } from "rxjs/Observable";
+import { map } from "rxjs/operators";
+import { UserService } from "./user.service";
 
 @Component({
   selector: 'chat-chat',
@@ -13,18 +15,17 @@ import { Observable } from "rxjs/Observable";
 export class ChatComponent implements OnInit, OnDestroy {
   currentUser: User;
 
-  activeUsers: User[];
-
   messages: Observable<Message[]>;
+  activeUsers: Observable<User[]>;
 
-  constructor(private authService: AuthService, private messageService: MessageService) {
-    this.messages = messageService.messages;
+  constructor(private authService: AuthService, private messageService: MessageService, private userService: UserService) {
+    this.messages = messageService.messages
+      .pipe(map(messages => messages.sort((m1, m2) => m1.dateTime.toString().localeCompare(m2.dateTime.toString()))));
+    this.activeUsers = this.userService.activeUsers;
   }
 
   ngOnInit() {
     this.currentUser = this.authService.userProfile;
-    this.activeUsers = [this.currentUser, this.currentUser, this.currentUser];
-
     this.messageService.getOldMessages(50, new Date());
   }
 

@@ -32,4 +32,10 @@ export class AuthService {
   get authToken(): string {
     return this.oAuthService.getAccessToken()
   }
+
+  getAuthHeaders(): {[header: string]: string} {
+    return {
+      'Authorization': 'Bearer ' + this.authToken
+    }
+  }
 }

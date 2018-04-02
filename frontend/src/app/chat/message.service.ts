@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import * as SockJS from 'sockjs-client';
 import * as StompJS from 'stompjs';
-import { Client } from "stompjs";
+import { Client } from 'stompjs';
 import { AuthService } from "../auth/auth.service";
 import { Message } from "./model/message.model";
 import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { combineLatest } from "rxjs/observable/combineLatest";
 
 
 @Injectable()
@@ -28,7 +26,7 @@ export class MessageService {
   private initializeWebSocketConnection() {
     let ws = new SockJS(MessageService.ServerUrl + '?access_token=' + this.authService.authToken);
     this.stompClient = StompJS.over(ws);
-    this.stompClient.connect(this.headers, () => this.onConnect());
+    this.stompClient.connect( this.authService.getAuthHeaders(), () => this.onConnect());
     this.stompClient.debug = null
   }
 
@@ -42,11 +40,11 @@ export class MessageService {
         const messageObject: Message = JSON.parse(message.body);
         this.messages$.next(this.messages$.getValue().concat(messageObject));
       }
-    }, this.headers);
+    }, this.authService.getAuthHeaders());
   }
 
   sendMessage(message: string): void {
-    this.stompClient.send("/app/send/message" , this.headers, message);
+    this.stompClient.send("/app/send/message" , this.authService.getAuthHeaders(), message);
   }
 
   shutDown(): void {
@@ -58,7 +56,7 @@ export class MessageService {
       return;
     }
     this.http.get<Message[]>('http://localhost:8080/message/history', {
-      headers: this.headers,
+      headers: this.authService.getAuthHeaders(),
       params: {
         size: size.toString(),
         date: typeof date === 'string' ? date : date.toISOString()
@@ -70,9 +68,4 @@ export class MessageService {
       });
   }
 
-  private get headers(): {[header: string]: string} {
-    return {
-      'Authorization': 'Bearer ' + this.authService.authToken
-    }
-  }
 }

@@ -1,5 +1,7 @@
 package by.bsuir.chat.domain;
 
+import java.util.Objects;
+
 public class User {
     private String name;
     private String photoUrl;
@@ -26,5 +28,20 @@ public class User {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name) &&
+                Objects.equals(photoUrl, user.photoUrl);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, photoUrl);
     }
 }
