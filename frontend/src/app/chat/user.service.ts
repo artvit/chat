@@ -8,9 +8,9 @@ import { startWith, switchMap } from "rxjs/operators";
 
 @Injectable()
 export class UserService {
-  private static readonly RefreshInterval = 60000;
+  private static readonly RefreshInterval = 5000;
 
-  activeUsers: Observable<User[]>
+  activeUsers: Observable<User[]>;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.activeUsers = interval(UserService.RefreshInterval).pipe(
